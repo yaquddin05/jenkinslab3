@@ -1,19 +1,13 @@
-# Use Python 3.6 or later as a base image
-FROM python:3.9
+FROM python:3.12-slim
 WORKDIR /app
 
-# Copy contents into image
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
 COPY . .
 
-# Install pip dependencies from requirements
-RUN pip install -r requirements.txt
-
-# Set YOUR_NAME environment variable
 ENV YOUR_NAME=yaqubu
-
-# Expose the correct port
 EXPOSE 5500
 
-# Create an entrypoint
 CMD ["python", "app.py"]
 

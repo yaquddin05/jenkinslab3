@@ -9,8 +9,8 @@ pipeline {
         stage("Install Trivy") {
             steps {
                 sh """
-                    if ! command -v trivy &> /dev/null; then
-                        curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin v${TRIVY_VERSION}
+                    if ! command -v trivy >/dev/null 2>&1; then
+                        curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sudo sh -s -- -b /usr/local/bin v${TRIVY_VERSION}
                     fi
                     trivy --version
                 """
